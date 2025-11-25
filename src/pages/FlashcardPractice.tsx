@@ -224,9 +224,9 @@ export default function FlashcardPractice() {
               className="p-8 h-[450px] flex flex-col items-center justify-center text-center relative overflow-hidden"
               onClick={() => setIsFlipped(!isFlipped)}
             >
-              <motion.div className="absolute inset-0 bg-mastery-red opacity-0" style={{ opacity: leftOpacity }} />
+              <motion.div className="absolute inset-0 bg-mastery-red/30 opacity-0" style={{ opacity: leftOpacity }} />
               <motion.div
-                className="absolute inset-0 bg-mastery-green opacity-0"
+                className="absolute inset-0 bg-mastery-green/30 opacity-0"
                 style={{ opacity: rightOpacity }}
               />
 
@@ -278,16 +278,18 @@ export default function FlashcardPractice() {
           </motion.div>
 
           <motion.div
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-mastery-red font-bold text-xl"
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-mastery-red font-bold text-lg"
             style={{ opacity: leftOpacity }}
           >
-            ← Red
+            <MasteryBadge mastery="red" size="lg" />
+            <span>Red</span>
           </motion.div>
           <motion.div
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-mastery-green font-bold text-xl"
+            className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-mastery-green font-bold text-lg"
             style={{ opacity: rightOpacity }}
           >
-            Green →
+            <span>Green</span>
+            <MasteryBadge mastery="green" size="lg" />
           </motion.div>
         </div>
 
