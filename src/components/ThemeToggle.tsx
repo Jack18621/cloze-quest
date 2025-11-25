@@ -1,13 +1,25 @@
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-interface ThemeToggleProps {
-  isDark: boolean;
-  toggle: () => void;
-}
+export const ThemeToggle = () => {
+  const [isDark, setIsDark] = useState(true);
 
-export const ThemeToggle = ({ isDark, toggle }: ThemeToggleProps) => {
+  useEffect(() => {
+    const stored = localStorage.getItem("flashcard-theme");
+    const prefersDark = stored === "dark" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    setIsDark(prefersDark);
+    document.documentElement.classList.toggle("dark", prefersDark);
+  }, []);
+
+  const toggle = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme);
+    localStorage.setItem("flashcard-theme", newTheme ? "dark" : "light");
+  };
+
   return (
     <motion.div
       className="fixed bottom-6 right-6 z-50"

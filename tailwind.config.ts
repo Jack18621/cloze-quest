@@ -53,6 +53,8 @@ export default {
           yellow: "hsl(var(--mastery-yellow))",
           green: "hsl(var(--mastery-green))",
         },
+        streak: "hsl(var(--streak))",
+        todoActive: "hsl(var(--todo-active))",
       },
       borderRadius: {
         lg: "var(--radius)",

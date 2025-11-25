@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ArrowDown, ArrowRight, ArrowUp, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MasteryBadgeProps {
@@ -9,16 +10,22 @@ interface MasteryBadgeProps {
 }
 
 const masteryConfig = {
-  red: { emoji: "❌", label: "Don't know", color: "mastery-red" },
-  orange: { emoji: "😕", label: "Vague", color: "mastery-orange" },
-  yellow: { emoji: "🙂", label: "Mostly OK", color: "mastery-yellow" },
-  green: { emoji: "😎", label: "Solid", color: "mastery-green" },
+  red: { icon: ArrowDown, label: "Don't know", color: "mastery-red" },
+  orange: { icon: ArrowDown, label: "Vague", color: "mastery-orange" },
+  yellow: { icon: ArrowRight, label: "Mostly OK", color: "mastery-yellow" },
+  green: { icon: Check, label: "Solid", color: "mastery-green" },
 };
 
 const sizeClasses = {
-  sm: "text-xs w-6 h-6",
-  md: "text-sm w-8 h-8",
-  lg: "text-lg w-10 h-10",
+  sm: "w-6 h-6",
+  md: "w-8 h-8",
+  lg: "w-10 h-10",
+};
+
+const iconSizeClasses = {
+  sm: "w-3 h-3",
+  md: "w-4 h-4",
+  lg: "w-5 h-5",
 };
 
 export const MasteryBadge = ({
@@ -28,6 +35,7 @@ export const MasteryBadge = ({
   className,
 }: MasteryBadgeProps) => {
   const config = masteryConfig[mastery];
+  const Icon = config.icon;
 
   return (
     <motion.button
@@ -36,16 +44,16 @@ export const MasteryBadge = ({
       onClick={onClick}
       disabled={!onClick}
       className={cn(
-        "rounded-full flex items-center justify-center font-medium transition-colors",
-        `bg-[hsl(var(--mastery-${mastery}))]`,
+        "rounded-full flex items-center justify-center font-bold transition-all border-2",
+        `bg-mastery-${mastery} border-mastery-${mastery} text-white`,
         sizeClasses[size],
-        onClick && "cursor-pointer hover:opacity-80",
+        onClick && "cursor-pointer hover:opacity-80 hover:shadow-lg",
         !onClick && "cursor-default",
         className
       )}
       title={config.label}
     >
-      {config.emoji}
+      <Icon className={iconSizeClasses[size]} strokeWidth={3} />
     </motion.button>
   );
 };
